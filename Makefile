@@ -10,7 +10,7 @@ $(NAME): ${OBJS}
 	@ar -rcs ${NAME} ${OBJS}
 
 %.o: %.s
-	nasm -f macho64 -o $@ $<
+	nasm -f elf64 -o $@ $<
 
 clean:
 	rm -f $(OBJS)
