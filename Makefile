@@ -12,6 +12,11 @@ $(NAME): ${OBJS}
 %.o: %.s
 	nasm -f elf64 -o $@ $<
 
+test: all
+	@clang main.c -o test $(NAME)
+	@./test
+	@rm test
+
 clean:
 	rm -f $(OBJS)
 
@@ -20,4 +25,4 @@ fclean: clean
 
 re: fclean all
 
-.PHONY: all re clean fclean
+.PHONY: all re clean fclean test
