@@ -6,12 +6,18 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:31:34 by macrespo          #+#    #+#             */
-/*   Updated: 2020/03/31 16:37:12 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/14 03:23:15 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBASM_H
 # define LIBASM_H
+
+# define BUFFER_SIZE 4096
+# define CCOLOR   "\033[0m"
+# define CRED     "\033[1;31m"
+# define CGREEN   "\033[1;32m"
+
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>

@@ -6,75 +6,59 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:17:29 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/13 18:28:13 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/14 03:31:40 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libasm.h"
 
-static void strlen_test(const char *s)
+static void strlen_test(const char *s, const char *test)
 {
     int     or;
     int     ft;
 
     or = strlen(s);
     ft = ft_strlen(s);
-    printf("ft [%u] | original [%u]", ft, or);
     if (or == ft)
-    {
-        printf("\033[1;32m");
-        printf(" [OK]\n");
-    }
+        printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
     else
-    {
-        printf("\033[1;31m");
-        printf(" [KO]\n");
-    }
-    printf("\033[0m");
+        printf("%s :" CRED "[KO]\n" CCOLOR, test);
 }
 
-static void strcpy_test(char *dest, const char *src, char *test)
+static void strcpy_test(const char *src, const char *test)
 {
-    char *dest2 = strdup(dest);
-    const char *src2 = strdup(src);
+	char	dest1[BUFFER_SIZE];
+	char	dest2[BUFFER_SIZE];
 
-    char    *or = strcpy(dest2, src2);
-    char    *ft = ft_strcpy(dest2, src2);
-
-    printf("test: %s", test);
-    if (strcmp(or, ft) == 0)
-    {
-        printf("\033[1;32m");
-        printf(" [OK]\n");
-    }
-    else
-    {
-        printf("\033[1;31m");
-        printf(" [KO]\n");
-    }
-    printf("\033[0m");
-    int i = 0;
-    while (dest[i++])
-        dest[i] = 0;
+	bzero(dest1, BUFFER_SIZE);
+	bzero(dest2, BUFFER_SIZE);
+	ft_strcpy(dest1, src);
+	strcpy(dest2, src);
+	if (!strcmp(dest1, dest2))
+		printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
+	else
+		printf("%s :" CRED "[KO]\n" CCOLOR, test);
 }
 
 int main(void)
 {
+    /* STRLEN TEST*/ 
     printf("FT_STRLEN TEST :\n");
-	strlen_test("Hello world");
-	strlen_test("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ");
-	strlen_test("");
-	strlen_test("\n");
-	strlen_test("\n\n");
-	strlen_test("111+}Te'st!wi/th*[<<As:c2ii3");
+	strlen_test("Hello world", "basic1");
+	strlen_test("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ", "long");
+	strlen_test("", "empty");
+	strlen_test("\n", "new line");
+	strlen_test("\n\n", "new line2");
+	strlen_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
     printf("-------------------------------------------------\n");
+    
+    /* STRCPY TEST */ 
     printf("FT_STRCPY TEST :\n");
-    char dest[4098];
-    strcpy_test(dest, "Hello world", "basic1");
-    strcpy_test(dest, "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ", "long text");
-    strcpy_test(dest, "", "empty string");
-    strcpy_test(dest, "\n", "new line 1");
-    strcpy_test(dest, "\n\n", "new line 2");
-    strcpy_test(dest, "111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
+    strcpy_test("Hello world", "basic1");
+	strcpy_test("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ", "long");
+	strcpy_test("", "empty");
+	strcpy_test("\n", "new line");
+	strcpy_test("\n\n", "new line2");
+	strcpy_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
     return (0);
 }
