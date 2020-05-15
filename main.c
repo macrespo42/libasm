@@ -6,7 +6,7 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:17:29 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/15 02:10:01 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/15 02:16:56 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ int main(void)
 	printf("-------------------------------------------------\n");
 
 	/* FT_STRCMP TEST*/	
-	strcmp_test("hello World", "hello World", "test2");
+	printf("FT_STRCMP TEST \n");
+	strcmp_test("hello World", "hello World", "basic1");
+	strcmp_test("hello World", "Hello World", "basic2");
+	strcmp_test("hello World", "", "empty1");
+	strcmp_test("", "", "empty2");
+	strcmp_test("", "Hello world", "empty3");
+	strcmp_test("", "\n", "new line 1");
+	strcmp_test("\n", "Hello world", "new line 2");
+	strcmp_test("\n", "\n", "new line 3");
+	strcmp_test("111+}Te'st!wi/th*[<<As:c2ii3", "111+}Te'st!wi/th*[<<As:c2ii3" ,"strange strings");
+	printf("-------------------------------------------------\n");
     return (0);
 }
