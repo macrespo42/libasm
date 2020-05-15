@@ -6,7 +6,7 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:17:29 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/14 03:31:40 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/15 02:10:01 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,17 @@ static void strcpy_test(const char *src, const char *test)
 		printf("%s :" CRED "[KO]\n" CCOLOR, test);
 }
 
+static void strcmp_test(const char *s1, const char *s2, const char *test)
+{
+	int		or = strcmp(s1, s2);
+	int		ft = ft_strcmp(s1, s2);
+
+	if (ft == or)
+		printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
+	else
+		printf("%s :" CRED "[KO]\n" CCOLOR, test);
+}
+
 int main(void)
 {
     /* STRLEN TEST*/ 
@@ -60,5 +71,9 @@ int main(void)
 	strcpy_test("\n", "new line");
 	strcpy_test("\n\n", "new line2");
 	strcpy_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
+	printf("-------------------------------------------------\n");
+
+	/* FT_STRCMP TEST*/	
+	strcmp_test("hello World", "hello World", "test2");
     return (0);
 }
