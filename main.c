@@ -6,7 +6,7 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:17:29 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/17 18:13:05 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/18 01:21:34 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,10 +64,27 @@ static void write_test(int fd, char *buf, size_t count, const char *test)
         printf("%s :" CRED "[KO]\n" CCOLOR, test);
 }
 
+static void read_test(int fd, size_t count, const char *test)
+{
+	int		or;
+	int		ft;
+	char	buf1[BUFFER_SIZE];
+	char	buf2[BUFFER_SIZE];
+
+	bzero(buf1, BUFFER_SIZE);
+	bzero(buf2, BUFFER_SIZE);
+	or = read(fd, buf1, count);
+	ft = ft_read(fd, buf2, count);
+	if (or == ft && strcmp(buf1, buf2) == 0)
+        printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
+    else
+        printf("%s :" CRED "[KO]\n" CCOLOR, test);
+}
+
 int main(void)
 {
-    /* STRLEN TEST*/ 
-    printf("FT_STRLEN TEST :\n");
+    /* STRLEN TESTS */ 
+    printf("FT_STRLEN TESTS :\n");
 	strlen_test("Hello world", "basic1");
 	strlen_test("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ", "long");
 	strlen_test("", "empty");
@@ -76,8 +93,8 @@ int main(void)
 	strlen_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
     printf("-------------------------------------------------\n");
     
-    /* STRCPY TEST */ 
-    printf("FT_STRCPY TEST :\n");
+    /* STRCPY TESTS */ 
+    printf("FT_STRCPY TESTS :\n");
     strcpy_test("Hello world", "basic1");
 	strcpy_test("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ", "long");
 	strcpy_test("", "empty");
@@ -86,8 +103,8 @@ int main(void)
 	strcpy_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
 	printf("-------------------------------------------------\n");
 
-	/* FT_STRCMP TEST */	
-	printf("FT_STRCMP TEST \n");
+	/* FT_STRCMP TESTS */	
+	printf("FT_STRCMP TESTS \n");
 	strcmp_test("hello World", "hello World", "basic1");
 	strcmp_test("hello World", "Hello World", "basic2");
 	strcmp_test("hello World", "", "empty1");
@@ -99,8 +116,8 @@ int main(void)
 	strcmp_test("111+}Te'st!wi/th*[<<As:c2ii3", "111+}Te'st!wi/th*[<<As:c2ii3" ,"strange strings");
 	printf("-------------------------------------------------\n");
 	
-	/* FT_WRITE TEST */
-	printf("FT_WRITE TEST \n");
+	/* FT_WRITE TESTS */
+	printf("FT_WRITE TESTS \n");
 	int		fd;
 
 	fd = open("write_tests", O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
@@ -109,10 +126,17 @@ int main(void)
 		printf("open() error");
 		return 1;
 	}
-	write_test(fd, "Hello_world", 11, "basic");
+	write_test(fd, "Hello_world\n", 12, "basic");
 	write_test(-2, "Hello_world", 11, "bad fd");
 	write_test(fd, NULL, 11, "NULL ptr");
 	write_test(fd, "Hello_world", -2, "bad len");
+	printf("-------------------------------------------------\n");
+	/* FT_READ TESTS */
+	printf("FT_READ TESTS \n");
+	read_test(fd, 12, "basic");
+	read_test(-2, 11, "bad fd");
+	read_test(fd, 11, "NULL ptr");
+	read_test(fd, -2, "bad len");
 	if (close(fd) == -1)
 	{
 		printf("close() error");
