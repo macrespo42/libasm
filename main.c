@@ -6,7 +6,7 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/12 15:17:29 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/15 02:16:56 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/17 18:13:05 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,19 @@ static void strcmp_test(const char *s1, const char *s2, const char *test)
 		printf("%s :" CRED "[KO]\n" CCOLOR, test);
 }
 
+static void write_test(int fd, char *buf, size_t count, const char *test)
+{
+    int     or;
+    int     ft;
+
+    or = write(fd, buf, count);
+    ft = ft_write(fd, buf, count);
+    if (or == ft)
+        printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
+    else
+        printf("%s :" CRED "[KO]\n" CCOLOR, test);
+}
+
 int main(void)
 {
     /* STRLEN TEST*/ 
@@ -73,7 +86,7 @@ int main(void)
 	strcpy_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
 	printf("-------------------------------------------------\n");
 
-	/* FT_STRCMP TEST*/	
+	/* FT_STRCMP TEST */	
 	printf("FT_STRCMP TEST \n");
 	strcmp_test("hello World", "hello World", "basic1");
 	strcmp_test("hello World", "Hello World", "basic2");
@@ -84,6 +97,27 @@ int main(void)
 	strcmp_test("\n", "Hello world", "new line 2");
 	strcmp_test("\n", "\n", "new line 3");
 	strcmp_test("111+}Te'st!wi/th*[<<As:c2ii3", "111+}Te'st!wi/th*[<<As:c2ii3" ,"strange strings");
+	printf("-------------------------------------------------\n");
+	
+	/* FT_WRITE TEST */
+	printf("FT_WRITE TEST \n");
+	int		fd;
+
+	fd = open("write_tests", O_WRONLY | O_CREAT, S_IRUSR | S_IWUSR);
+	if (fd == -1)
+	{
+		printf("open() error");
+		return 1;
+	}
+	write_test(fd, "Hello_world", 11, "basic");
+	write_test(-2, "Hello_world", 11, "bad fd");
+	write_test(fd, NULL, 11, "NULL ptr");
+	write_test(fd, "Hello_world", -2, "bad len");
+	if (close(fd) == -1)
+	{
+		printf("close() error");
+		return 1;
+	}
 	printf("-------------------------------------------------\n");
     return (0);
 }

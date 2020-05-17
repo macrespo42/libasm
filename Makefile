@@ -23,6 +23,7 @@ test: all
 
 clean:
 	rm -f $(OBJS)
+	rm -f write_tests
 
 fclean: clean
 	rm -f $(NAME)

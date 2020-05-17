@@ -6,7 +6,7 @@
 /*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/30 17:31:34 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/14 03:23:15 by macrespo         ###   ########.fr       */
+/*   Updated: 2020/05/17 17:42:41 by macrespo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
 
 char    *ft_strdup(const char *s);
 char    *ft_strcpy(char *dest, const char *src);
