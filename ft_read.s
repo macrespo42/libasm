@@ -4,7 +4,8 @@ section .text
 ft_write:
     mov rax, 0  ; sys_read
     syscall     ; call read
-    jc error    ; if sys_read return error, carry flag set to 1
+    cmp rax, 0
+    jl error
     ret
 error:
     mov rax, -1
