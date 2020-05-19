@@ -81,6 +81,21 @@ static void read_test(int fd, size_t count, const char *test)
         printf("%s :" CRED "[KO]\n" CCOLOR, test);
 }
 
+static void strdup_test(const char *src, const char *test)
+{
+	char	*str1;
+	char	*str2;
+
+	str1 = ft_strdup(src);
+	str2 = strdup(src);
+	if (!strcmp(str1, str2))
+		printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
+	else
+		printf("%s :" CRED "[KO]\n" CCOLOR, test);
+	free(str1);
+	free(str2);
+}
+
 int main(void)
 {
     /* STRLEN TESTS */ 
@@ -142,6 +157,15 @@ int main(void)
 		printf("close() error");
 		return 1;
 	}
+	printf("-------------------------------------------------\n");
+	/* FT_STRDUP TESTS */
+	printf("FT_STRDUP TESTS \n");
+	strdup_test("Hello world", "basic1");
+	strdup_test("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tristique dui at tellus blandit vulputate. In hac habitasse platea dictumst. In a nibh ", "long");
+	strdup_test("", "empty");
+	strdup_test("\n", "new line");
+	strdup_test("\n\n", "new line2");
+	strdup_test("111+}Te'st!wi/th*[<<As:c2ii3", "strange string");
 	printf("-------------------------------------------------\n");
     return (0);
 }
