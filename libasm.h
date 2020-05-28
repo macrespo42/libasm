@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   libasm.h                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: macrespo <macrespo@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/03/30 17:31:34 by macrespo          #+#    #+#             */
-/*   Updated: 2020/05/18 01:20:50 by macrespo         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef LIBASM_H
 # define LIBASM_H
 
@@ -25,6 +13,7 @@
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
+# include <errno.h>
 
 char    *ft_strdup(const char *s);
 char    *ft_strcpy(char *dest, const char *src);

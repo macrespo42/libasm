@@ -1,3 +1,4 @@
+extern __errno_location
 global ft_write
 
 section .text
@@ -8,5 +9,9 @@ ft_write:
     jl error
     ret
 error:
+	neg rax,	; absolute of rax
+	mov rdi, rax
+	call __errno_location
+	mov [rax], rdi
     mov rax, -1
     ret
