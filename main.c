@@ -43,30 +43,52 @@ static void write_test(int fd, char *buf, size_t count, const char *test)
 {
     int     or;
     int     ft;
+    int		ft_err;
+    int		or_err;
 
     or = write(fd, buf, count);
+    or_err = errno;
     ft = ft_write(fd, buf, count);
+    ft_err = errno;
     if (or == ft)
         printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
     else
         printf("%s :" CRED "[KO]\n" CCOLOR, test);
+    if (ft == -1 || or == -1)
+    {
+    	if (ft_err == or_err)
+    		printf("ERRNO [FT:%d]||[OR:%d] : %s" CGREEN "[OK]\n" CCOLOR, ft_err, or_err, test);
+    	else
+    		printf("ERRNO [FT:%d]||[OR:%d] : %s" CGREEN "[KO]\n" CCOLOR, ft_err, or_err, test);
+    }
 }
 
 static void read_test(int fd, size_t count, const char *test)
 {
 	int		or;
 	int		ft;
+	int		ft_err;
+	int		or_err;
 	char	buf1[BUFFER_SIZE];
 	char	buf2[BUFFER_SIZE];
 
 	bzero(buf1, BUFFER_SIZE);
 	bzero(buf2, BUFFER_SIZE);
 	or = read(fd, buf1, count);
+	or_err = errno;
 	ft = ft_read(fd, buf2, count);
+	ft_err = errno;
 	if (or == ft && strcmp(buf1, buf2) == 0)
         printf("%s :" CGREEN "[OK]\n" CCOLOR, test);
     else
         printf("%s :" CRED "[KO]\n" CCOLOR, test);
+    if (ft == -1 || or == -1)
+    {
+    	if (ft_err == or_err)
+    		printf("ERRNO [FT:%d]||[OR:%d] : %s" CGREEN "[OK]\n" CCOLOR, ft_err, or_err, test);
+    	else
+    		printf("ERRNO [FT:%d]||[OR:%d] : %s" CGREEN "[KO]\n" CCOLOR, ft_err, or_err, test);
+    }
 }
 
 static void strdup_test(const char *src, const char *test)
